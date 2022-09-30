@@ -28,6 +28,7 @@ export default {
   background: #db0a0b;
   position: relative;
   top: -20px;
+  margin-bottom: -20px;
   .nav-list {
     width: 1200px;
     margin: 0 auto;

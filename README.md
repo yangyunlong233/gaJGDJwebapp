@@ -1,6 +1,6 @@
 # GA JGDJ site
 
-## Log
+## update Log
 ### 2022-09-30
 - 创建项目
 - 新增组件 topCover，头图封面

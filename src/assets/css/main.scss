@@ -1,1 +1,26 @@
 @charset 'UTF-8';
+
+/* global */
+a {
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    color: inherit;
+}
+
+/* layout */
+.layout1200 {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/* ad width 1200*/
+.ad-1200 {
+    position: relative;
+    width: 1200px;
+    margin: 30px auto;
+    img {
+        width: 100%;
+    }
+}
