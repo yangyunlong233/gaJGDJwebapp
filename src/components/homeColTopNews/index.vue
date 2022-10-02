@@ -4,7 +4,7 @@
       <h1><a href="#">十三届全国人大五次会议在京开幕<br>习近平汪洋王沪宁赵乐际等在主席台就座</a></h1>
     </div>
     <ul class="news-list">
-      <li><a href="#">习近平中青班开班式讲话要点梳理学习专题<span>03-06</span></a></li>
+      <li><a href="#">习近平中青班开班式讲话要点梳理学习专题习近平中青班开班式讲话要点梳理学习专题<span>03-06</span></a></li>
       <li><a href="#">中组部召开基层党建工作重点任务推进会<span>03-06</span></a></li>
       <li><a href="#">听音频 学“四史” 这四本简史有声书请查收<span>03-06</span></a></li>
       <li><a href="#">《我们，从延安走来》| 实事求是思想路线这样形成<span>03-06</span></a></li>
@@ -46,6 +46,9 @@ export default {
       padding: 18px 40px 0 0;
       font-size: 16px;
       color: #000;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       span {
         position: absolute;
         top: 19px;
