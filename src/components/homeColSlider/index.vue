@@ -41,6 +41,7 @@ export default {
 <style lang="scss" scoped>
 .cmpt-home-col-slider {
   width: 450px;
+  margin: 0 0 20px;
   .slider-container {
     width: 100%;
     .content {

@@ -1,5 +1,5 @@
 <template>
-  <div class="cmpt-home-col-notice" id="cmptHomeColNotice">
+  <div class="cmpt-home-col-side-notice" id="cmptHomeColSideNotice">
     <h2 class="col-title"><a href="#">更多</a></h2>
     <ul>
       <li><a href="#">当时代守关人 保持状态“向未来” 解锁“奋斗密码”</a></li>
@@ -13,12 +13,12 @@
 
 <script>
 export default {
-  name: 'cmptHomeColNotice'
+  name: 'cmptHomeColSideNotice'
 }
 </script>
 
 <style lang="scss" scoped>
-.cmpt-home-col-notice {
+.cmpt-home-col-side-notice {
   width: 240px;
   h2.col-title {
     position: relative;

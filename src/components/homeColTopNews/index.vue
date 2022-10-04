@@ -26,6 +26,7 @@ export default {
 <style lang="scss" scoped>
 .cmpt-home-col-top-news {
   width: 450px;
+  margin: 0 0 20px;
   .top-news-container {
     width: 100%;
     h1 {
