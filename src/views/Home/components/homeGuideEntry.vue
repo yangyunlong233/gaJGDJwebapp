@@ -1,27 +1,27 @@
 <template>
   <div class="cmpt-home-guide-entry" id="cmptHomeGuideEntry">
     <div class="entry">
-      <img src="../../assets/images/icon_guide.svg">
+      <img src="@/assets/images/icon_guide.svg">
       <span>应用系统导航</span>
     </div>
     <div class="entry">
-      <img src="../../assets/images/icon_guide.svg">
+      <img src="@/assets/images/icon_guide.svg">
       <span>全国公安导航</span>
     </div>
     <div class="entry">
-      <img src="../../assets/images/icon_guide.svg">
+      <img src="@/assets/images/icon_guide.svg">
       <span>全省公安导航</span>
     </div>
     <div class="entry">
-      <img src="../../assets/images/icon_guide.svg">
+      <img src="@/assets/images/icon_guide.svg">
       <span>厅直部门</span>
     </div>
     <div class="entry">
-      <img src="../../assets/images/icon_guide.svg">
+      <img src="@/assets/images/icon_guide.svg">
       <span>州市党建</span>
     </div>
     <div class="entry">
-      <img src="../../assets/images/icon_guide.svg">
+      <img src="@/assets/images/icon_guide.svg">
       <span>专题专栏</span>
     </div>
   </div>

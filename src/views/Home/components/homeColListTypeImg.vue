@@ -1,35 +1,35 @@
 <template>
   <div class="cmpt-col-list-type-img" id="cmptColListTypeImg">
     <h2><span>图片新闻</span></h2>
-    <img class="bg" src="../../assets/images/list_img_bg.png">
+    <img class="bg" src="@/assets/images/list_img_bg.png">
     <ul>
       <li>
         <a href="#">
-          <img src="../../assets/images/imglist/case_01.jpg">
+          <img src="@/assets/images/imglist/case_01.jpg">
           <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
         </a>
       </li>
       <li>
         <a href="#">
-          <img src="../../assets/images/imglist/case_01.jpg">
+          <img src="@/assets/images/imglist/case_01.jpg">
           <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
         </a>
       </li>
       <li>
         <a href="#">
-          <img src="../../assets/images/imglist/case_01.jpg">
+          <img src="@/assets/images/imglist/case_01.jpg">
           <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
         </a>
       </li>
       <li>
         <a href="#">
-          <img src="../../assets/images/imglist/case_01.jpg">
+          <img src="@/assets/images/imglist/case_01.jpg">
           <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
         </a>
       </li>
       <li>
         <a href="#">
-          <img src="../../assets/images/imglist/case_01.jpg">
+          <img src="@/assets/images/imglist/case_01.jpg">
           <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
         </a>
       </li>

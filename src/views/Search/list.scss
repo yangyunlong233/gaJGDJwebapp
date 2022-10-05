@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+/* For Search Result contains List */
+.result-container {
+    width: 1200px;
+    margin: 30px 0;
+
+    ul {
+        li {
+            position: relative;
+            margin: 35px 0;
+            display: flex;
+            flex-flow: row nowrap;
+
+            img {
+                width: 384px;
+                height: 256px;
+                margin: 0 25px 0 0;
+            }
+
+            .contains {
+                padding: 5px 0 5px 0;
+            }
+
+            h2 {
+                font-size: 24px;
+                font-weight: bold;
+
+                span {
+                    color: #DB0A0B;
+                    background: #FFF966;
+                    font-size: inherit;
+                    font-weight: inherit;
+                }
+            }
+
+            p {
+                padding: 15px 0;
+                font-size: 16px;
+                line-height: 28px;
+                color: #333;
+            }
+
+            dl {
+
+                dt,
+                dd {
+                    font-size: 14px;
+                    display: inline-block;
+                }
+
+                dt {
+                    font-weight: bold;
+                    color: #3b7195;
+                }
+
+                dd {
+                    font-weight: normal;
+                    color: #7a7a7a;
+                    margin: 0 10px 0 0;
+                }
+
+                dd:after {
+                    content: '∕';
+                    padding: 0 0 0 10px;
+                    color: rgba(#7a7a7a, .5);
+                }
+
+                dd:last-of-type:after {
+                    content: '';
+                }
+            }
+        }
+    }
+}

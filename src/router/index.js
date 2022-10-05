@@ -8,6 +8,21 @@ const routes = [
     component: Home
   },
   {
+    path: '/list',
+    name: 'List',
+    component: () => import('../views/List')
+  },
+  {
+    path: '/article',
+    name: 'Article',
+    component: () => import('../views/Article')
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: () => import('../views/Search')
+  },
+  {
     path: '/404',
     name: 'NotFound',
     component: () => import('../views/NotFound')

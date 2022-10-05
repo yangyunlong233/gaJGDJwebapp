@@ -1,9 +1,7 @@
 <template>
-  <div class="cmpt-home-col-list-type-b" id="cmptHomeColListTypeB">
+  <div class="cmpt-home-col-list-type-a" id="cmptHomeColListTypeA">
     <h2 class="col-title">
-      <i class="icon">
-        <slot name="icon"><img src="../../assets/images/icon_col_title_type_b_01.svg"></slot>
-      </i>
+      <i class="icon"><slot name="icon"><img src="@/assets/images/icon_col_title_type_a_01.svg"></slot></i>
       <a href="#">通知通报</a>
       <i class="line"></i>
     </h2>
@@ -20,53 +18,44 @@
 
 <script>
 export default {
-  name: 'cmptHomeColListTypeB'
+  name: 'cmptHomeColListTypeA'
 }
 </script>
 
 <style lang="scss" scoped>
-.cmpt-home-col-list-type-b {
+.cmpt-home-col-list-type-a {
   width: 450px;
   margin: 0 0 20px;
   h2.col-title {
-    padding: 0 0 25px;
     position: relative;
     font-size: 20px;
     font-weight: bold;
     color: #DB0A0B;
-    background-image: url("../../assets/images/col_title_type_b_bg.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-
-    i,
-    a {
+    i, a {
       display: inline-block;
       vertical-align: middle;
     }
-
     a {
       padding: 0 8px;
+      background: #fff;
       position: relative;
       z-index: 9;
     }
-
     i.line {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 50%;
       right: 0;
+      transform: translateY(-50%);
+      width: 400px;
       height: 1px;
-      background-image: linear-gradient(90deg, #DB0A0B 80%, #fff 100%);
+      background-image: linear-gradient(90deg, #B3B3B3 50%, #fff 100%);
     }
   }
-
   ul {
     font-size: 16px;
     color: #000;
-    margin: -15px 0 0;
-    padding: 0;
+    margin: 25px 0 0;
     min-height: 225px;
-
     li {
       position: relative;
       margin: 18px 0;
@@ -76,7 +65,6 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
     li:after {
       content: '';
       width: 4px;

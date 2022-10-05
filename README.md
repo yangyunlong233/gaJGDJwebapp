@@ -6,6 +6,8 @@
 - 新增组件，homeLinks
 - 新增组件，foot
 - 修改头图，增加顶部 ad 标语
+- 新增视图，List/Article/Search，及对应组件
+- 重新规划组件，将视图专属组件移至视图目录下
 ### 2022-10-04
 - 修改组件，homeColListTypeA
 - 新增组件，homeColListTypeB

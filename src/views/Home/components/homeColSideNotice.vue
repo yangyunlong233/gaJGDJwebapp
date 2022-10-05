@@ -24,7 +24,7 @@ export default {
     position: relative;
     width: 100%;
     height: 53px;
-    background-image: url(../../assets/images/icon_home_notice.png);
+    background-image: url("../../../assets/images/icon_home_notice.png");
     background-size: 100% 100%;
     a {
       position: absolute;

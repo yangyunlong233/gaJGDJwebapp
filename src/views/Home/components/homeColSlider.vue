@@ -4,7 +4,7 @@
       <ul class="content">
         <li>
           <a href="#">
-            <img src="../../assets/images/slider/case_01.jpg">
+            <img src="@/assets/images/slider/case_01.jpg">
             <div class="tt">学习贯彻十九届六中全会精神</div>
           </a>
         </li>
@@ -18,13 +18,13 @@
     <div class="slider-entrys">
       <div class="entry red">
         <a href="#">
-          <img src="../../assets/images/icon_slider_entry_01.svg">
+          <img src="@/assets/images/icon_slider_entry_01.svg">
           <span>党建暨思想政治工作考核台账系统</span>
         </a>
       </div>
       <div class="entry orange">
         <a href="#">
-          <img src="../../assets/images/icon_slider_entry_02.svg">
+          <img src="@/assets/images/icon_slider_entry_02.svg">
           <span>网上投稿</span>
         </a>
       </div>
