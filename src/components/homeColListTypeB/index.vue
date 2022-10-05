@@ -65,6 +65,7 @@ export default {
     color: #000;
     margin: -15px 0 0;
     padding: 0;
+    min-height: 225px;
 
     li {
       position: relative;

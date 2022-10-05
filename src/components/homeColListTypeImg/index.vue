@@ -45,6 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 .cmpt-col-list-type-img {
+  position: relative;
   width: auto;
   height: 275px;
   margin: 0 0 30px;

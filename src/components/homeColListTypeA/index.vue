@@ -55,6 +55,7 @@ export default {
     font-size: 16px;
     color: #000;
     margin: 25px 0 0;
+    min-height: 225px;
     li {
       position: relative;
       margin: 18px 0;

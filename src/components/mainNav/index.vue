@@ -26,6 +26,7 @@ export default {
   width: 100%;
   height: 58px;
   background: #db0a0b;
+  border-top: 1px solid rgba(#e9ba71, .7);
   position: relative;
   top: -20px;
   margin-bottom: -20px;

@@ -17,10 +17,10 @@ export default {
 <style lang="scss" scoped>
 .cmpt-top-cover {
   width: 100%;
-  height: 300px;
+  height: 250px;
   background-image: url(../../assets/images/top_cover.jpg);
   background-size: auto 100%;
-  background-position: top center;
+  background-position: top left;
   background-repeat: no-repeat;
   .layout1200 {
     width: 1200px;
@@ -30,7 +30,7 @@ export default {
   }
   .site-logo, .ga-logo {
     position: absolute;
-    top: 60px;
+    top: 70px;
     height: 70px;
     img {
       height: 100%;
@@ -41,14 +41,15 @@ export default {
     left: 0;
   }
   .ga-logo {
+    top: 50px;
     right: 0;
+    height: 60px;
   }
   .top-title {
     position: absolute;
-    bottom: 75px;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 32px;
+    bottom: 105px;
+    right: 0;
+    height: 20px;
     img {
       height: 100%;
       width: auto;

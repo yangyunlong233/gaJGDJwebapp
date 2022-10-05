@@ -1,15 +1,11 @@
 # GA JGDJ site
 
 ## update Log
-### 2022-09-30
-- 创建项目
-- 新增组件 topCover，头图封面
-- 新增组件，mainNav，主导航
-- 新增组件，homeColSlider，首页轮播图栏目
-- 新增组件，homeColTopNews，首页头条新闻栏目
-### 2022-10-02
-- 新增组件，homeColListMinimal，首页列表栏目板块，类型 1
-- 新增组件，homeColNotice，首页通知公告版块
+### 2022-10-05
+- 新增组件，homeColListTypeC
+- 新增组件，homeLinks
+- 新增组件，foot
+- 修改头图，增加顶部 ad 标语
 ### 2022-10-04
 - 修改组件，homeColListTypeA
 - 新增组件，homeColListTypeB
@@ -18,7 +14,15 @@
 - 新增组件，homeColSideFeature
 - 新增组件，homeColListTypeImg
 - 修改部分组件样式
-
+### 2022-10-02
+- 新增组件，homeColListMinimal，首页列表栏目板块，类型 1
+- 新增组件，homeColNotice，首页通知公告版块
+### 2022-09-30
+- 创建项目
+- 新增组件 topCover，头图封面
+- 新增组件，mainNav，主导航
+- 新增组件，homeColSlider，首页轮播图栏目
+- 新增组件，homeColTopNews，首页头条新闻栏目
 
 ## 遗留问题
 - v2.0 版本的头图设计修改
