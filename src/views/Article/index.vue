@@ -2,12 +2,12 @@
   <div class="article" id="Article">
     <topCover />
     <mainNav />
-    <breadcrumb />
+    <breadcrumb :viewName="viewName" :borderId="borderId" from="正文" />
     <div class="info">
-      <span>来源：办公室</span>
-      <span>作者：李建刚</span>
-      <span>审核：林东</span>
-      <span>发布时间：2022-03-02 14:00:00</span>
+      <span>供稿：{{source}}</span>
+      <span>作者：{{author}}</span>
+      <span>审核：{{check}}</span>
+      <span>发布时间：{{time}}</span>
       <span>
         <img src="@/assets/images/icon_article_print.svg">
         <a class="current" href="#">打印</a>
@@ -21,15 +21,8 @@
       </span>
     </div>
     <div class="container">
-      <h1>习近平主持召开中央全面深化改革委员会第二十四次会议强调<br>
-      加快建设世界一流企业 加强基础学科人才培养<br>
-      李克强王沪宁韩正出席</h1>
-      <div class="content">
-        <p>新华社北京2月28日电 中共中央总书记、国家主席、中央军委主席、中央全面深化改革委员会主任习近平2月28日下午主持召开中央全面深化改革委员会第二十四次会议，审议通过了《关于加快建设世界一流企业的指导意见》、《推进普惠金融高质量发展的实施意见》、《关于加强基础学科人才培养的意见》、《关于推进国有企业打造原创技术策源地的指导意见》。</p>
-        <p>新华社北京2月28日电 中共中央总书记、国家主席、中央军委主席、中央全面深化改革委员会主任习近平2月28日下午主持召开中央全面深化改革委员会第二十四次会议，审议通过了《关于加快建设世界一流企业的指导意见》、《推进普惠金融高质量发展的实施意见》、《关于加强基础学科人才培养的意见》、《关于推进国有企业打造原创技术策源地的指导意见》。</p>
-        <p>新华社北京2月28日电 中共中央总书记、国家主席、中央军委主席、中央全面深化改革委员会主任习近平2月28日下午主持召开中央全面深化改革委员会第二十四次会议，审议通过了《关于加快建设世界一流企业的指导意见》、《推进普惠金融高质量发展的实施意见》、《关于加强基础学科人才培养的意见》、《关于推进国有企业打造原创技术策源地的指导意见》。</p>
-        <p>新华社北京2月28日电 中共中央总书记、国家主席、中央军委主席、中央全面深化改革委员会主任习近平2月28日下午主持召开中央全面深化改革委员会第二十四次会议，审议通过了《关于加快建设世界一流企业的指导意见》、《推进普惠金融高质量发展的实施意见》、《关于加强基础学科人才培养的意见》、《关于推进国有企业打造原创技术策源地的指导意见》。</p>
-      </div>
+      <h1 v-html="title"></h1>
+      <div class="content" v-html="contain"></div>
     </div>
     <foot />
   </div>
@@ -42,11 +35,48 @@ import breadcrumb from '../../components/breadcrumb'
 import foot from '../../components/foot'
 export default {
   name: 'Article',
+  data () {
+    return {
+      id: this.$route.query.id,
+      title: '',
+      contain: '',
+      source: '',
+      author: '',
+      check: '',
+      time: '',
+      viewName: '',
+      borderId: 0
+    }
+  },
   components: {
     topCover,
     mainNav,
     breadcrumb,
     foot
+  },
+  created () {
+    this.get_contains()
+  },
+  methods: {
+    get_contains () {
+      this.$axios.get(`/api/doc/info/${this.id}`)
+        .then(response => {
+          this.title = response.data.data.title
+          this.contain = response.data.data.htmlContent
+          this.source = response.data.data.author
+          this.check = response.data.data.checkMan
+          this.time = response.data.data.writeDate
+          this.viewName = response.data.data.viewName
+          this.borderId = response.data.data.borderId
+          console.log(response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    get_article_column (colId) {
+      // this.$axios.get(`/api/`)
+    }
   }
 }
 </script>

@@ -2,18 +2,19 @@
   <div class="cmpt-breadcrumb" id="cmptBreadcrumb">
     <div class="layout1200">
       <img src="../../assets/images/icon_breadcrumb_flag.svg">
-      <span><a href="#">首页</a></span>
+      <span><a href="/">首页</a></span>
       <span>/</span>
-      <span><a href="#">新闻动态</a></span>
+      <span><router-link :to="{path: '/list', query: {id: borderId, limited: 10, page: 1}}">{{viewName}}</router-link></span>
       <span>/</span>
-      <span class="current">文章列表</span>
+      <span class="current">{{from}}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'cmptBreadcrumb'
+  name: 'cmptBreadcrumb',
+  props: ['viewName', 'borderId', 'from']
 }
 </script>
 

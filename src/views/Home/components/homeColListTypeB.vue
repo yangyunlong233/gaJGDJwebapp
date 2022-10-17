@@ -4,23 +4,40 @@
       <i class="icon">
         <slot name="icon"><img src="@/assets/images/icon_col_title_type_b_01.svg"></slot>
       </i>
-      <a href="#">通知通报</a>
+      <a href="#">{{title}}</a>
       <i class="line"></i>
     </h2>
     <ul>
-      <li><a href="#">十八大以来组织工作取得新进展新成效十八大以来组织工作取得新进展新成效</a></li>
-      <li><a href="#">十八大以来组织工作取得新进展新成效</a></li>
-      <li><a href="#">十八大以来组织工作取得新进展新成效</a></li>
-      <li><a href="#">十八大以来组织工作取得新进展新成效</a></li>
-      <li><a href="#">十八大以来组织工作取得新进展新成效</a></li>
-      <li><a href="#">十八大以来组织工作取得新进展新成效</a></li>
+      <li v-for="item, index in listContains" :key="index">
+        <router-link :to="{path: '/list', query: {id: item.id}}">{{item.title}}</router-link>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'cmptHomeColListTypeB'
+  name: 'cmptHomeColListTypeB',
+  props: ['colId', 'title'],
+  data () {
+    return {
+      listContains: []
+    }
+  },
+  created () {
+    this.get_contains()
+  },
+  methods: {
+    // 通知通告，id: 41
+    get_contains () {
+      this.$axios.get(`/api/doc/list/${this.colId}/6`)
+        .then(response => {
+          this.listContains = response.data.data
+          // console.log('this.topContains', this.topContains)
+          // console.log('this.listContains', this.listContains)
+        })
+    }
+  }
 }
 </script>
 

@@ -1,23 +1,41 @@
 <template>
   <div class="cmpt-main-nav" id="cmptMainNav">
     <ul class="nav-list">
-      <li><a href="#">首页</a></li>
-      <li><a href="#">党建新闻</a></li>
-      <li><a href="#">领导讲话</a></li>
-      <li><a href="#">厅直党建</a></li>
-      <li><a href="#">州市党建</a></li>
-      <li><a href="#">党建知识</a></li>
-      <li><a href="#">他山之石</a></li>
-      <li><a href="#">五色长廊</a></li>
-      <li><a href="#">建言献言</a></li>
-      <li class="search-button"><a href="#"><img src="../../assets/images/icon_search.svg"></a></li>
+      <li v-for="item, index in getNav" :key="index">
+        <router-link v-if="item.viewName === '首页'" to="/">{{item.viewName}}</router-link>
+        <router-link v-if="item.viewName !== '首页'" :to="{path: '/list', query: {id: item.hrefValue, limited: 10, page: 1}}">{{item.viewName}}</router-link>
+      </li>
+      <li class="search-button"><a><img src="../../assets/images/icon_search.svg"></a></li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
-  name: 'cmptMainNav'
+  name: 'cmptMainNav',
+  computed: {
+    ...mapGetters([
+      'getNav'
+    ])
+  },
+  created () {
+    if (this.getNav.length === 0) {
+      this.get_contains()
+    }
+  },
+  methods: {
+    ...mapMutations([
+      'setNav'
+    ]),
+    get_contains () {
+      this.$axios.get('/api/menus/1')
+        .then(response => {
+          // console.log(response.data.data[0].bodyItems)
+          this.$store.commit('setNav', response.data.data[0].bodyItems)
+        })
+    }
+  }
 }
 </script>
 

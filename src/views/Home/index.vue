@@ -1,5 +1,6 @@
 <template>
   <div id="Home" class="home">
+    <!-- <div>{{ $store.state.nav }}</div> -->
     <div class="home-top-ad"></div>
     <topCover />
     <mainNav />
@@ -12,12 +13,12 @@
         <homeColTopNews />
       </div>
       <div class="home-col-layout">
-        <homeColListTypeA>
+        <homeColListTypeA colId="41" title="通知通报">
           <template v-slot:icon>
             <img src="../../assets/images/icon_col_title_type_a_01.svg">
           </template>
         </homeColListTypeA>
-        <homeColListTypeA>
+        <homeColListTypeA colId="32" title="领导讲话">
           <template v-slot:icon>
             <img src="../../assets/images/icon_col_title_type_a_02.svg">
           </template>
@@ -28,27 +29,27 @@
         <homeColSideFeature />
       </div>
     </div>
-    <div class="layout1200">
+    <div class="layout1200" style="z-index: 99">
       <homeGuideEntry />
     </div>
     <div class="layout1200">
       <div class="home-col-layout">
-        <homeColListTypeB>
+        <homeColListTypeB colId="33" title="厅直党建">
           <template v-slot:icon>
             <img src="../../assets/images/icon_col_title_type_b_01.svg">
           </template>
         </homeColListTypeB>
-        <homeColListTypeB>
+        <homeColListTypeB colId="34" title="州市党建">
           <template v-slot:icon>
             <img src="../../assets/images/icon_col_title_type_b_02.svg">
           </template>
         </homeColListTypeB>
-        <homeColListTypeB>
+        <homeColListTypeB colId="44" title="文明建设">
           <template v-slot:icon>
             <img src="../../assets/images/icon_col_title_type_b_03.svg">
           </template>
         </homeColListTypeB>
-        <homeColListTypeB>
+        <homeColListTypeB colId="45" title=" 时政导读">
           <template v-slot:icon>
             <img src="../../assets/images/icon_col_title_type_b_04.svg">
           </template>
@@ -74,6 +75,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import topCover from '../../components/topCover'
 import mainNav from '../../components/mainNav'
 import homeColSlider from './components/homeColSlider.vue'
@@ -105,6 +107,25 @@ export default {
     homeColListTypeImg,
     homeLinks,
     foot
+  },
+  computed: {
+  },
+  created () {
+    this.get_nav_handle()
+  },
+  methods: {
+    ...mapMutations([
+      'setNav'
+    ]),
+    // 首页上发请求获取菜单，放到 vuex 中供使用，首页菜单组 id: 1
+    get_nav_handle () {
+      this.$axios.get('/api/menus/body/1').then(response => {
+        this.$store.commit('setNav', response.data.data)
+      })
+        .catch(error => {
+          console.log('--------' + error)
+        })
+    }
   }
 }
 </script>

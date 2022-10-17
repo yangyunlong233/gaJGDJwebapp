@@ -1,23 +1,38 @@
 <template>
   <div class="cmpt-pagination" id="cmptPagination" :style="{padding:(type == 'clear' ? '0' : '0 0 0 240px'), width:(type == 'clear' ? '1200px' : '960px')}">
-    <span class="current"><a href="#">1</a></span>
-    <span><a href="#">2</a></span>
-    <span><a href="#">3</a></span>
-    <span><a href="#">4</a></span>
-    <span><a href="#">5</a></span>
-    <span><a href="#">...</a></span>
-    <span><a href="#">上一页</a></span>
-    <span><a href="#">下一页</a></span>
-    <span><a href="#">末页</a></span>
-    <span class="total">1/16页</span>
-    <span class="total">共176条</span>
+    <span v-show="page > 1 ? true :false">
+      <router-link
+        :to="{path: '/list', query: {id: borderId, limited: 10, page: parseInt(page) - 1}}">
+        上一页
+      </router-link>
+    </span>
+    <span v-for="i in 5" v-show="(i + parseInt(page) - 1) <= totalPage" :key="i" :class="{'current': i == 1}">
+      <router-link :to="{path: '/list', query: {id: borderId, limited: 10, page: i + parseInt(page) - 1}}">
+        {{i + parseInt(page) - 1}}
+      </router-link>
+    </span>
+    <span class="more-than-5" v-show="parseInt(totalPage) - parseInt(page) > 4">...</span>
+    <span v-show="page != totalPage ? true : false">
+      <router-link
+        :to="{path: '/list', query: {id: borderId, limited: 10, page: parseInt(page) + 1}}">
+        下一页
+      </router-link>
+    </span>
+    <span v-show="parseInt(totalPage) - parseInt(page) > 4">
+      <router-link
+        :to="{path: '/list', query: {id: borderId, limited: 10, page: totalPage}}">
+        末页
+      </router-link>
+    </span>
+    <span class="total">{{page + '/' + totalPage}}页</span>
+    <span class="total">共{{count}}条</span>
   </div>
 </template>
 
 <script>
 export default {
   name: 'cmptPagination',
-  props: ['type']
+  props: ['type', 'borderId', 'limited', 'page', 'count', 'totalPage']
 }
 </script>
 
@@ -55,6 +70,14 @@ export default {
     border-color: #DB0A0B;
     color: #fff;
     font-weight: bold;
+  }
+  span.more-than-5 {
+    border: 0;
+    &:hover {
+      background: none;
+      color: #000;
+      font-weight: normal;
+    }
   }
   span.total {
     margin: 0 0 0 30px;

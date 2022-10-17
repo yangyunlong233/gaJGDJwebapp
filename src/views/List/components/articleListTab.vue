@@ -1,17 +1,41 @@
 <template>
   <div class="cmpt-article-list-tab" id="cmptArticleListTab">
     <ul>
-      <li class="current"><a href="#">干部任免</a></li>
-      <li><a href="#">职级调整</a></li>
-      <li><a href="#">人员调配</a></li>
-      <li><a href="#">退休离职</a></li>
+      <li v-for="item, index in contains" :key="index" :class="{'current': item.id == borderId}">
+        <router-link :to="{path: '/list', query: {id: item.id, limited: 10, page: 1}}">
+          {{item.viewName}}
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'cmptArticleListTab'
+  name: 'cmptArticleListTab',
+  props: ['borderId'],
+  data () {
+    return {
+      contains: []
+    }
+  },
+  created () {
+    this.get_contains()
+  },
+  methods: {
+    get_contains () {
+      this.$axios.get('/api/docBorder/body/1')
+        .then(response => {
+          if (response.data.success) {
+            this.contains = response.data.data
+            // console.log(response.data.data)
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  }
 }
 </script>
 

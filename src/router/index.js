@@ -10,7 +10,8 @@ const routes = [
   {
     path: '/list',
     name: 'List',
-    component: () => import('../views/List')
+    component: () => import('../views/List'),
+    meta: { title: '文章列表', noCache: false }
   },
   {
     path: '/article',

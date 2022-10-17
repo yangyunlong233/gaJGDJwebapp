@@ -1,41 +1,26 @@
 <template>
   <div class="cmpt-article-list" id="cmptArticleList">
     <ul class="type-a">
-      <li>
-        <a href="#">
-          <img src="@/assets/images/article_case/list_case.jpg">
-          <h3>打击治理跨境赌博工作第四次专题会议召开 坚持重拳出击 注重标本兼治</h3>
-          <p>全国公安机关“昆仑2022”专项行动动员部署视频会议2月28日召开，公安部党委委员、副部长杜航伟出席并讲话。会议强调，要认真学习贯彻习近平总书记重要指示...</p>
-          <span>03-12</span>
-        </a>
+      <li v-for="item, index in listContains" :key="index" :class="{'type-a': item.imageUrl, 'type-b': item.imageUrl == ''}">
+        <router-link :to="{path: '/article', query: {id: item.id}}">
+          <img src="@/assets/images/article_case/list_case.jpg" v-show="item.imageUrl">
+          <h3 v-html="item.title"></h3>
+          <p v-html="item.note ? ellipsis(item.note, 90) : ''"></p>
+          <span v-html="item.writeDate"></span>
+        </router-link>
       </li>
-      <li>
-        <a href="#">
-          <img src="@/assets/images/article_case/list_case.jpg">
-          <h3>打击治理跨境赌博工作第四次专题会议召开 坚持重拳出击 注重标本兼治</h3>
-          <p>全国公安机关“昆仑2022”专项行动动员部署视频会议2月28日召开，公安部党委委员、副部长杜航伟出席并讲话。会议强调，要认真学习贯彻习近平总书记重要指示...</p>
-          <span>03-12</span>
-        </a>
-      </li>
-    </ul>
-    <ul class="type-b">
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
-      <li><a href="#">公安部部署打击食药环和知识产权犯罪“昆仑2022”专项行动<span>03-12</span></a></li>
     </ul>
   </div>
 </template>
 
 <script>
+import { ellipsis } from '../../../libs.js'
 export default {
-  name: 'cmptArticleList'
+  name: 'cmptArticleList',
+  props: ['listContains'],
+  methods: {
+    ellipsis
+  }
 }
 </script>
 
@@ -51,10 +36,14 @@ export default {
       position: relative;
     }
   }
-  ul.type-a {
+  ul {
+    li.type-a {
+      padding: 0 0 25px 210px;
+    }
+    li.type-b {
+      padding: 0;
+    }
     li {
-      padding: 0 0 0 210px;
-      min-height: 128px;
       margin: 0 0 30px;
       img {
         position: absolute;
@@ -76,18 +65,6 @@ export default {
       span {
         display: block;
         font-size: 16px;
-        color: #B3B3B3;
-      }
-    }
-  }
-  ul.type-b {
-    margin: 40px 0 0;
-    li {
-      margin: 35px 0;
-      font-size: 18px;
-      span {
-        padding: 0 0 0 20px;
-        font-size: inherit;
         color: #B3B3B3;
       }
     }
