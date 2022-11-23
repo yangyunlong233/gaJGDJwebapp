@@ -1,23 +1,60 @@
 <template>
   <div class="cmpt-home-col-list-type-c" id="cmptHomeColListTypeC">
     <h2>
-      <span class="current">青年工作</span>
-      <span>前卫体协</span>
+      <span :class="{'current': this.current === 0}" @mouseenter="switch_handler(0)">
+        <router-link :to="{path: '/list', query: {id: colId1, limited: 10, page: 1}}">{{title1}}</router-link>
+      </span>
+      <span  v-show="title2" class="line"></span>
+      <span v-show="title2"  :class="{'current': this.current === 1}"  @mouseenter="switch_handler(1)">
+        <router-link :to="{path: '/list', query: {id: colId2, limited: 10, page: 1}}">{{title2}}</router-link>
+      </span>
     </h2>
     <ul>
-      <li><a href="#">陈希出席全国组织部长会议 部署2022年组织工作</a></li>
-      <li><a href="#">陈希出席全国组织部长会议 部署2022年组织工作</a></li>
-      <li><a href="#">陈希出席全国组织部长会议 部署2022年组织工作</a></li>
-      <li><a href="#">陈希出席全国组织部长会议 部署2022年组织工作</a></li>
-      <li><a href="#">陈希出席全国组织部长会议 部署2022年组织工作</a></li>
-      <li><a href="#">陈希出席全国组织部长会议 部署2022年组织工作</a></li>
+      <li v-for="item, index in showContains" :key="index">
+        <router-link :to="{path: '/article', query: {id: item.id}}">{{item.title}}</router-link>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { getColumnList } from '../../../api.js'
 export default {
-  name: 'cmptHomeColListTypeC'
+  name: 'cmptHomeColListTypeC',
+  props: ['title1', 'colId1', 'title2', 'colId2'],
+  data () {
+    return {
+      contains1: [],
+      contains2: [],
+      showContains: [],
+      current: 0
+    }
+  },
+  created () {
+    if (this.title1 && this.colId1) {
+      this.getColumnList(this.colId1, 6).then(res => {
+        this.contains1 = res
+        this.showContains = this.contains1
+      })
+    }
+    if (this.title2 && this.colId2) {
+      this.getColumnList(this.colId2, 6).then(res => { this.contains2 = res })
+    }
+  },
+  mounted () {
+  },
+  methods: {
+    getColumnList,
+    switch_handler (i) {
+      this.current = i
+      if (i === 0) {
+        this.showContains = this.contains1
+      }
+      if (i === 1) {
+        this.showContains = this.contains2
+      }
+    }
+  }
 }
 </script>
 
@@ -36,12 +73,12 @@ export default {
       font-weight: bold;
       vertical-align: middle;
       color: #7A7A7A;
+      cursor: pointer;
     }
     span.current {
       color: #DB0A0B;
     }
-    span:first-of-type:after {
-      content: '';
+    span.line {
       display: inline-block;
       height: 20px;
       border-right: 1px solid #B3B3B3;

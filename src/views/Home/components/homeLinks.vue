@@ -2,23 +2,31 @@
   <div class="cmpt-home-links" id="cmptHomeLinks">
     <h2><a href="#">友情链接</a></h2>
     <ul>
-      <li><a href="#">全国公安政治工作信息网</a></li>
-      <li><a href="#">云南公安政工信息网</a></li>
-      <li><a href="#">首都公安爱警网</a></li>
-      <li><a href="#">全国公安思想政治工作之窗</a></li>
-      <li><a href="#">昆明市公安局政治部</a></li>
-      <li><a href="#">全国公安政治工作信息网</a></li>
-      <li><a href="#">云南公安政工信息网</a></li>
-      <li><a href="#">首都公安爱警网</a></li>
-      <li><a href="#">全国公安思想政治工作之窗</a></li>
-      <li><a href="#">昆明市公安局政治部</a></li>
+      <li v-for="item, index in contains" :key="index">
+        <router-link :to="item.hrefValue">{{item.viewName}}</router-link>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { getGroupLinks } from '../../../api.js'
 export default {
-  name: 'cmptHomeLinks'
+  name: 'cmptHomeLinks',
+  data () {
+    return {
+      contains: []
+    }
+  },
+  created () {
+    // 友情链接组 id 571
+    this.getGroupLinks(571).then(response => {
+      this.contains = response
+    })
+  },
+  methods: {
+    getGroupLinks
+  }
 }
 </script>
 
@@ -58,15 +66,15 @@ export default {
     width: auto;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: center;
     li {
-      margin: 10px 0;
-      width: 225px;
+      margin: 10px 10px;
+      min-width: 218px;
       height: 50px;
       line-height: 50px;
       background: rgba(255, 184, 119, 0.1);
       border: 1px dashed #DB0A0B;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       text-align: center;
     }

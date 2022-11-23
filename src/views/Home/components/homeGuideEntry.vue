@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { getGroupLinks } from '../../../api.js'
 export default {
   name: 'cmptHomeGuideEntry',
   data () {
@@ -28,7 +29,16 @@ export default {
     }
   },
   created () {
-    this.get_group()
+    // 全局导航组 id 579
+    this.getGroupLinks(579).then(response => {
+      this.group = response
+      // 遍历全局导航下面的分组
+      for (let i = 0; i < this.group.length; i++) {
+        this.getGroupLinks(this.group[i].id).then(res => {
+          this.groupItems[i] = res
+        })
+      }
+    })
   },
   methods: {
     show_handler (i) {
@@ -39,22 +49,7 @@ export default {
       }
       this.currentIndex = i
     },
-    get_group () {
-      // 全局导航 id:579
-      this.$axios.get('api/links/body/579')
-        .then(response => {
-          this.group = response.data.data
-          // 遍历全局导航下面的分组
-          for (let i = 0; i < this.group.length; i++) {
-            this.$axios.get(`/api/links/body/${this.group[i].id}`)
-              .then(response => {
-                console.log(response.data.data)
-                this.groupItems[i] = (response.data.data)
-              })
-          }
-          // console.log(response.data.data[0].bodyItems)
-        })
-    }
+    getGroupLinks
   }
 }
 </script>
@@ -81,6 +76,7 @@ export default {
       display: flex;
       flex-flow: row wrap;
       li {
+        min-width: 80px;
         padding: 10px 22px;
         margin: 0 10px 20px;
         font-size: 16px;
@@ -88,6 +84,7 @@ export default {
         background: #fff;
         border-radius: 4px;
         transition: background .5s;
+        text-align: center;
       }
       li:hover {
         background: #db0a0b;

@@ -115,7 +115,12 @@
 
 <script>
 export default {
-  name: 'cmptHomeColSideTotal'
+  name: 'cmptHomeColSideTotal',
+  data () {
+    return {
+
+    }
+  }
 }
 </script>
 

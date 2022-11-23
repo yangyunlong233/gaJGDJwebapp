@@ -1,11 +1,12 @@
 <template>
   <div id="Home" class="home">
-    <!-- <div>{{ $store.state.nav }}</div> -->
     <div class="home-top-ad"></div>
     <topCover />
     <mainNav />
     <div class="layout1200">
-      <div class="ad-1200"><img src="../../assets/images/ad_1200.jpg"></div>
+      <div class="ad-1200">
+        <a :href="fullAd.hrefValue"><img :src="fullAd.viewImage"/></a>
+      </div>
     </div>
     <div class="layout1200">
       <div class="home-col-layout">
@@ -13,20 +14,16 @@
         <homeColTopNews />
       </div>
       <div class="home-col-layout">
-        <homeColListTypeA colId="41" title="通知通报">
+        <!-- homeColListTypeC vuex state is columnTypeAState -->
+        <homeColListTypeA v-for="item, index in columnTypeAState" :key="index" :colId="item.id" :title="item.title">
           <template v-slot:icon>
-            <img src="../../assets/images/icon_col_title_type_a_01.svg">
-          </template>
-        </homeColListTypeA>
-        <homeColListTypeA colId="32" title="领导讲话">
-          <template v-slot:icon>
-            <img src="../../assets/images/icon_col_title_type_a_02.svg">
+            <img :src="item.icon">
           </template>
         </homeColListTypeA>
       </div>
       <div class="home-side-col-layout">
         <homeColSideNotice />
-        <homeColSideFeature />
+        <homeColSideFeature :contains="featureAd"/>
       </div>
     </div>
     <div class="layout1200" style="z-index: 99">
@@ -34,24 +31,10 @@
     </div>
     <div class="layout1200">
       <div class="home-col-layout">
-        <homeColListTypeB colId="33" title="厅直党建">
+        <!-- homeColListTypeC vuex state is columnTypeBState -->
+        <homeColListTypeB v-for="item, index in columnTypeBState" :key="index" :colId="item.id" :title="item.title">
           <template v-slot:icon>
-            <img src="../../assets/images/icon_col_title_type_b_01.svg">
-          </template>
-        </homeColListTypeB>
-        <homeColListTypeB colId="34" title="州市党建">
-          <template v-slot:icon>
-            <img src="../../assets/images/icon_col_title_type_b_02.svg">
-          </template>
-        </homeColListTypeB>
-        <homeColListTypeB colId="44" title="文明建设">
-          <template v-slot:icon>
-            <img src="../../assets/images/icon_col_title_type_b_03.svg">
-          </template>
-        </homeColListTypeB>
-        <homeColListTypeB colId="45" title=" 时政导读">
-          <template v-slot:icon>
-            <img src="../../assets/images/icon_col_title_type_b_04.svg">
+            <img :src="item.icon">
           </template>
         </homeColListTypeB>
       </div>
@@ -60,12 +43,8 @@
       </div>
       <homeColListTypeImg />
       <div class="home-col-layout full-col-layout">
-        <homeColListTypeC />
-        <homeColListTypeC />
-        <homeColListTypeC />
-        <homeColListTypeC />
-        <homeColListTypeC />
-        <homeColListTypeC />
+        <!-- homeColListTypeC vuex state is columnTypeCState -->
+        <homeColListTypeC v-for="item, index in columnTypeCState" :key="index" :title1="item.title1" :title2="item.title2" :colId1="item.id1" :colId2="item.id2" />
       </div>
       <homeLinks />
     </div>
@@ -75,7 +54,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
+import { getGroupImgLinks } from '../../api.js'
 import topCover from '../../components/topCover'
 import mainNav from '../../components/mainNav'
 import homeColSlider from './components/homeColSlider.vue'
@@ -92,6 +72,12 @@ import homeLinks from './components/homeLinks.vue'
 import foot from '../../components/foot'
 export default {
   name: 'Home',
+  data () {
+    return {
+      fullAd: {},
+      featureAd: []
+    }
+  },
   components: {
     topCover,
     mainNav,
@@ -109,11 +95,18 @@ export default {
     foot
   },
   computed: {
+    ...mapState([
+      'columnTypeAState',
+      'columnTypeBState',
+      'columnTypeCState'
+    ])
   },
   created () {
     this.get_nav_handle()
+    this.get_ad_links()
   },
   methods: {
+    getGroupImgLinks,
     ...mapMutations([
       'setNav'
     ]),
@@ -125,6 +118,12 @@ export default {
         .catch(error => {
           console.log('--------' + error)
         })
+    },
+    get_ad_links () {
+      this.getGroupImgLinks(1).then(response => {
+        this.fullAd = response[0]
+        this.featureAd = response.slice(1)
+      })
     }
   }
 }

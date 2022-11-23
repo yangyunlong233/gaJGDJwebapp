@@ -1,6 +1,11 @@
 # GA JGDJ site
 
 ## update Log
+### 2022-10-18
+- 将首页栏目名称和版块 id 提取出来，放在 store 里，如要修改版块调用的内容，修改 store 的配置即可
+  - columnTypeAState
+  - columnTypeBState
+  - columnTypeCState
 ### 2022-10-05
 - 新增组件，homeColListTypeC
 - 新增组件，homeLinks

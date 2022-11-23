@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { getColumnList } from '../../../api.js'
 export default {
   name: 'cmptHomeColSideNotice',
   data () {
@@ -18,20 +19,13 @@ export default {
     }
   },
   created () {
-    this.get_contains()
+    // 公告公示栏目 id 51
+    this.getColumnList(51, 5).then(response => {
+      this.contains = response
+    })
   },
   methods: {
-    get_contains () {
-      // 公告公示栏目 id: 43
-      this.$axios.get('/api/doc/list/43/5')
-        .then(response => {
-          // console.log(response.data.data)
-          this.contains = response.data.data
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
+    getColumnList
   }
 }
 </script>

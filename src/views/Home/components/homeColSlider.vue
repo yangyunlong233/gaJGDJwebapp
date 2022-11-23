@@ -2,30 +2,25 @@
   <div class="cmpt-home-col-slider" id="cmptHomeColSlider">
     <div class="slider-container">
       <ul class="content">
-        <li>
-          <a href="#">
-            <img src="@/assets/images/slider/case_01.jpg">
-            <div class="tt">学习贯彻十九届六中全会精神</div>
-          </a>
-        </li>
+        <transition-group>
+          <li v-for="item, index in contains" :key="index" v-show="count == index">
+            <router-link :to="{path: '/article', query: {id: item.id}}">
+              <img :src="item.imageUrl">
+              <div class="tt">{{ellipsis(item.title, 24)}}</div>
+            </router-link>
+          </li>
+        </transition-group>
       </ul>
       <ul class="flag">
-        <li class="current"></li>
-        <li></li>
-        <li></li>
+        <li v-for="i in contains.length" :key="i" :class="{'current': (i - 1 == count)}" @click="timer_handler(i)"></li>
       </ul>
     </div>
     <div class="slider-entrys">
-      <div class="entry red">
+      <div v-for="item, index in links" :key="index" class="entry" :class="{'red': index == 0, 'orange': index == 1}">
         <a href="#">
-          <img src="@/assets/images/icon_slider_entry_01.svg">
-          <span>党建暨思想政治工作考核台账系统</span>
-        </a>
-      </div>
-      <div class="entry orange">
-        <a href="#">
-          <img src="@/assets/images/icon_slider_entry_02.svg">
-          <span>网上投稿</span>
+          <img v-if="index == 0" src="@/assets/images/icon_slider_entry_01.svg">
+          <img v-if="index == 1" src="@/assets/images/icon_slider_entry_02.svg">
+          <span>{{item.viewName}}</span>
         </a>
       </div>
     </div>
@@ -33,8 +28,55 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { getImgList, getGroupLinks } from '../../../api.js'
+import { ellipsis } from '../../../libs.js'
 export default {
-  name: 'cmptHomeColSlider'
+  name: 'cmptHomeColSlider',
+  data () {
+    return {
+      count: 0,
+      contains: [],
+      links: [],
+      timer: null
+    }
+  },
+  computed: {
+    ...mapState([
+      'columnSliderIdState'
+    ])
+  },
+  created () {
+    this.getImgList(this.columnSliderIdState, 5).then(response => {
+      this.contains = response
+    })
+    this.getGroupLinks(572).then(response => {
+      this.links = response
+    })
+    this.timer = this.sliderAnimation()
+  },
+  methods: {
+    ellipsis,
+    getImgList,
+    getGroupLinks,
+    sliderAnimation () {
+      setInterval(() => {
+        if (this.count >= this.contains.length - 1) {
+          this.count = 0
+        } else {
+          this.count++
+        }
+      }, 5000)
+    },
+    timer_handler (i) {
+      clearInterval(this.timer)
+      this.timer = null
+      this.count = i - 1
+      setTimeout(() => {
+        this.timer = this.sliderAnimation()
+      }, 2000)
+    }
+  }
 }
 </script>
 
@@ -45,7 +87,14 @@ export default {
   .slider-container {
     width: 100%;
     .content {
+      position: relative;
       width: 100%;
+      height: 348px;
+      li {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
       img {
         width: 450px;
         height: 300px;
@@ -117,5 +166,23 @@ export default {
       color: #ED4E0A;
     }
   }
+}
+/* 进入之前和离开后的样式 */
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+/* 离开和进入过程中的样式 */
+.v-enter-active,
+.v-leave-active {
+  /* 添加过渡动画 */
+  transition: opacity 0.3s ease;
+}
+
+/* 进入之后和离开之前的样式 */
+.v-enter-to,
+.v-leave-from {
+  opacity: 1;
 }
 </style>

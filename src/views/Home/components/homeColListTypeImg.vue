@@ -3,43 +3,59 @@
     <h2><span>图片新闻</span></h2>
     <img class="bg" src="@/assets/images/list_img_bg.png">
     <ul>
-      <li>
-        <a href="#">
-          <img src="@/assets/images/imglist/case_01.jpg">
-          <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
-        </a>
+      <li v-for="item, index in contains" :key="index" :style="{left: offset+'px'}">
+        <router-link :to="{path: '/article', query: {id: item.id}}">
+          <img :src="item.imageUrl">
+          <p>{{item.title}}</p>
+        </router-link>
       </li>
-      <li>
-        <a href="#">
-          <img src="@/assets/images/imglist/case_01.jpg">
-          <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img src="@/assets/images/imglist/case_01.jpg">
-          <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img src="@/assets/images/imglist/case_01.jpg">
-          <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img src="@/assets/images/imglist/case_01.jpg">
-          <p>公安局举行2020年全州公安机关人民警察荣誉仪式</p>
-        </a>
+      <li v-for="item, index in contains" :key="index" :style="{left: offset+'px'}">
+        <router-link :to="{path: '/article', query: {id: item.id}}">
+          <img :src="item.imageUrl">
+          <p>{{item.title}}</p>
+        </router-link>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { getImgList } from '../../../api.js'
 export default {
-  name: 'cmptColListTypeImg'
+  name: 'cmptColListTypeImg',
+  data () {
+    return {
+      offset: 0,
+      timer: null,
+      contains: []
+    }
+  },
+  computed: {
+    ...mapState([
+      'columnSliderFloatIdState'
+    ])
+  },
+  created () {
+    this.getImgList(this.columnSliderFloatIdState, 10).then(response => {
+      this.contains = response
+      this.sliderAnimation()
+    })
+  },
+  methods: {
+    getImgList,
+    sliderAnimation () {
+      if (this.contains.length > 4) {
+        const i = parseInt(this.contains.length)
+        setInterval(() => {
+          this.offset = this.offset - 1
+          if (Math.abs(this.offset) === (218 + 25) * i) {
+            this.offset = 0
+          }
+        }, 50)
+      }
+    }
+  }
 }
 </script>
 
@@ -91,8 +107,10 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     li {
+      position: relative;
       width: 218px;
       display: inline-block;
+      vertical-align: top;
       margin: 0 25px 0 0;
       img {
         width: 218px;

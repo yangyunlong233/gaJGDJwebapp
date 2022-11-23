@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { getUpgradeList } from '../../../api.js'
 import { ellipsis } from '../../../libs.js'
 export default {
   name: 'cmptHomeColTopNews',
@@ -22,19 +23,14 @@ export default {
     }
   },
   created () {
-    this.get_contains()
+    // 去最新更新的 10 条出来
+    this.getUpgradeList(10, 1).then(response => {
+      this.topContains = response[0]
+      this.listContains = response.slice(1)
+    })
   },
   methods: {
-    // 党建新闻，id: 31
-    get_contains () {
-      this.$axios.get('/api/doc/list/31/10')
-        .then(response => {
-          this.topContains = response.data.data[0]
-          this.listContains = response.data.data.slice(1)
-          // console.log('this.topContains', this.topContains)
-          // console.log('this.listContains', this.listContains)
-        })
-    },
+    getUpgradeList,
     ellipsis
   }
 }

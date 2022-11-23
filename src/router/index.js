@@ -22,21 +22,32 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: () => import('../views/Search')
-  },
-  {
-    path: '/404',
-    name: 'NotFound',
-    component: () => import('../views/NotFound')
-  },
-  {
-    path: '/:catchAll(.*)',
-    redirect: '/404'
   }
+  // {
+  //   path: '/404',
+  //   name: 'NotFound',
+  //   component: () => import('../views/NotFound')
+  // },
+  // {
+  //   path: '/:catchAll(.*)',
+  //   redirect: '/404'
+  // }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  // history: createWebHistory('/web/'),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // 兼容chrome
+  document.body.scrollTop = 0
+  // 兼容firefox
+  document.documentElement.scrollTop = 0
+  // 兼容safari
+  window.pageYOffset = 0
+  next()
 })
 
 export default router

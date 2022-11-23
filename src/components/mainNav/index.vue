@@ -5,8 +5,16 @@
         <router-link v-if="item.viewName === '首页'" to="/">{{item.viewName}}</router-link>
         <router-link v-if="item.viewName !== '首页'" :to="{path: '/list', query: {id: item.hrefValue, limited: 10, page: 1}}">{{item.viewName}}</router-link>
       </li>
-      <li class="search-button"><a><img src="../../assets/images/icon_search.svg"></a></li>
+      <li class="search-button" @click="search_show_handler()"><a><img src="../../assets/images/icon_search.svg"></a></li>
     </ul>
+    <transition>
+      <div class="search-layout" v-show="showSearch">
+        <div class="layout1200">
+          <input type="text" placeholder="请输入搜索关键字" v-model="keyWords">
+          <button class="search-action" @click="search_action_handler()">搜索</button>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -14,6 +22,12 @@
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'cmptMainNav',
+  data () {
+    return {
+      showSearch: false,
+      keyWords: ''
+    }
+  },
   computed: {
     ...mapGetters([
       'getNav'
@@ -34,6 +48,14 @@ export default {
           // console.log(response.data.data[0].bodyItems)
           this.$store.commit('setNav', response.data.data[0].bodyItems)
         })
+    },
+    search_show_handler () {
+      this.showSearch = !this.showSearch
+    },
+    search_action_handler () {
+      if (this.keyWords) {
+        this.$router.push(`/search?key=${this.keyWords}&page=1`)
+      }
     }
   }
 }
@@ -42,12 +64,43 @@ export default {
 <style lang="scss" scoped>
 .cmpt-main-nav {
   width: 100%;
-  height: 58px;
   background: #db0a0b;
   border-top: 1px solid rgba(#e9ba71, .7);
   position: relative;
   top: -20px;
   margin-bottom: -20px;
+  .search-layout {
+    box-sizing: border-box;
+    position: relative;
+    height: 50px;
+    background: rgba(#fff, .95);
+    border-bottom: 1px solid rgba(#ccc, .3);
+    z-index: 9999;
+    input {
+      margin-right: 100px;
+      width: calc(100% - 4px - 100px);
+      height: 46px;
+      border: 0;
+      border-bottom: 2px solid #db0a0b;
+      background: none;
+      outline: none;
+      font-size: 16px;
+      text-align: left;
+    }
+    .search-action {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 50px;
+      background: rgba(#db0a0b, .8);
+      border: 0;
+      border-left: 2px solid #db0a0b;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
   .nav-list {
     width: 1200px;
     margin: 0 auto;
@@ -90,5 +143,25 @@ export default {
       }
     }
   }
+}
+/* 进入之前和离开后的样式 */
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(30%);
+}
+
+/* 离开和进入过程中的样式 */
+.v-enter-active,
+.v-leave-active {
+  /* 添加过渡动画 */
+  transition: all 0.3s ease;
+}
+
+/* 进入之后和离开之前的样式 */
+.v-enter-to,
+.v-leave-from {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>

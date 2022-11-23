@@ -7,13 +7,14 @@
     </h2>
     <ul>
       <li v-for="item, index in listContains" :key="index">
-        <router-link :to="{path: '/list', query: {id: item.id}}">{{item.title}}</router-link>
+        <router-link :to="{path: '/article', query: {id: item.id}}">{{item.title}}</router-link>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { getColumnList } from '../../../api.js'
 export default {
   name: 'cmptHomeColListTypeA',
   props: ['colId', 'title'],
@@ -23,18 +24,14 @@ export default {
     }
   },
   created () {
-    this.get_contains()
+    if (this.colId && this.title) {
+      this.getColumnList(this.colId, 6).then(response => {
+        this.listContains = response
+      })
+    }
   },
   methods: {
-    // 通知通告，id: 41
-    get_contains () {
-      this.$axios.get(`/api/doc/list/${this.colId}/6`)
-        .then(response => {
-          this.listContains = response.data.data
-          // console.log('this.topContains', this.topContains)
-          // console.log('this.listContains', this.listContains)
-        })
-    }
+    getColumnList
   }
 }
 </script>

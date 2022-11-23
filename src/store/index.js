@@ -1,8 +1,18 @@
 import { createStore } from 'vuex'
 
+import { columnTypeAState } from './columnTypeAConfig.js'
+import { columnTypeBState } from './columnTypeBConfig.js'
+import { columnTypeCState } from './columnTypeCConfig.js'
+import { columnSliderIdState, columnSliderFloatIdState } from './columnSliderIdConfig.js'
+
 export default createStore({
   state: {
-    nav: []
+    nav: [],
+    columnTypeCState,
+    columnTypeBState,
+    columnTypeAState,
+    columnSliderIdState,
+    columnSliderFloatIdState
   },
   getters: {
     getNav (state) {
